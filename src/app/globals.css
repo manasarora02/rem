@@ -1,8 +1,37 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: oklch(97.5% 0.012 85);
+  --foreground: oklch(13% 0.008 80);
+  --rem-paper: oklch(97.5% 0.012 85);
+  --rem-paper-warm: oklch(95% 0.016 80);
+  --rem-ink: oklch(13% 0.008 80);
+  --rem-muted: oklch(46% 0.016 75);
+  --rem-soft: oklch(92% 0.014 78);
+  --rem-line: oklch(25% 0.015 80 / 0.1);
+  --rem-panel: oklch(99% 0.006 85);
+  --rem-blue: #38bdf8;
+  --rem-blue-strong: #0284c7;
+  --rem-blue-soft: oklch(94% 0.04 225);
+  --rem-accent: var(--rem-blue);
+  --rem-accent-strong: var(--rem-blue-strong);
+}
+
+:root[data-theme="dark"] {
+  --background: oklch(12% 0.008 80);
+  --foreground: oklch(95% 0.01 85);
+  --rem-paper: oklch(12% 0.008 80);
+  --rem-paper-warm: oklch(16% 0.01 78);
+  --rem-ink: oklch(95% 0.01 85);
+  --rem-muted: oklch(65% 0.015 80);
+  --rem-soft: oklch(20% 0.012 78);
+  --rem-line: oklch(92% 0.015 85 / 0.12);
+  --rem-panel: oklch(16% 0.008 80);
+  --rem-blue: #38bdf8;
+  --rem-blue-strong: #7dd3fc;
+  --rem-blue-soft: oklch(30% 0.06 230);
 }
 
 @theme inline {
@@ -12,15 +41,30 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  text-rendering: geometricPrecision;
+}
+
+::selection {
+  background: rgb(56 189 248 / 0.25);
+  color: var(--foreground);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
